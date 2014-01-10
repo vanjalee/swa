@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>SWAzam</artifactId>
+        <groupId>at.ac.tuwien.swa.SWAzam</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    
+    <properties>
+		<spring.version>4.0.0.RELEASE</spring.version>
+		<tomcat.version>7.0.34</tomcat.version>
+	</properties>
+
+    <artifactId>Server</artifactId>
+
+	<dependencies>
+		<dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.2.9-b14002</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+		<dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.0-beta</version>
+        </dependency>
+        
+        <!-- those are for eclipse to get the WS running -->
+        <dependency>
+			<groupId>com.sun.xml.stream.buffer</groupId>
+			<artifactId>streambuffer</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>policy</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.gmbal</groupId>
+			<artifactId>gmbal-api-only</artifactId>
+			<version>3.2.0-b003</version>
+		</dependency>
+		                      
+            
+        <!-- Spring 3 dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency> 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+     
+        <!-- Tomcat -->   
+        <dependency>
+	        <groupId>org.apache.tomcat.embed</groupId>
+	        <artifactId>tomcat-embed-core</artifactId>
+	        <version>${tomcat.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.tomcat.embed</groupId>
+	        <artifactId>tomcat-embed-logging-juli</artifactId>
+	        <version>${tomcat.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.tomcat.embed</groupId>
+	        <artifactId>tomcat-embed-jasper</artifactId>
+	        <version>${tomcat.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.tomcat</groupId>
+	        <artifactId>tomcat-jasper</artifactId>
+	        <version>${tomcat.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.tomcat</groupId>
+	        <artifactId>tomcat-jasper-el</artifactId>
+	        <version>${tomcat.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.tomcat</groupId>
+	        <artifactId>tomcat-jsp-api</artifactId>
+	        <version>${tomcat.version}</version>
+	    </dependency>
+    
+		<dependency>
+			<groupId>org.springmodules</groupId>
+			<artifactId>spring-modules-validation</artifactId>
+			<version>0.8</version>
+		</dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.sisu.inject</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+            <version>3.1.8</version>
+        </dependency>    
+            
+            
+        <dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+                
+        <!-- PRIMEFACES -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>home</artifactId>
+			<version>1.0.10</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- JSF -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		
+		<!-- EL -->
+		<dependency>
+			<groupId>com.sun.el</groupId>
+			<artifactId>el-ri</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- Jersey CLient -->
+		<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-server</artifactId>
+    <version>1.17.1</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-core</artifactId>
+    <version>1.17.1</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-servlet</artifactId>
+    <version>1.17.1</version>
+</dependency>
+
+
+            
+	</dependencies>
+	
+	
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>at.ac.tuwien.swa.Server</mainClass>
+                    <arguments>
+                        <argument>9003</argument>
+                    </arguments>
+                </configuration>
+            </plugin>    
+        </plugins>
+    </build>
+    
+    <repositories>
+	    <repository>
+		    <id>prime-repo</id>
+		    <name>PrimeFaces Maven Repository</name>
+		    <url>http://repository.primefaces.org</url>
+		    <layout>default</layout>
+		</repository>
+	</repositories>
+</project>

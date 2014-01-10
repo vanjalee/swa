@@ -1,0 +1,11 @@
+You need:
+JDK 1.7
+Maven
+Git Client for your system
+GitHub account
+
+Clean How to run
+root folder: mvn clean install
+run server/client/peer: server/client/peer folder: mvn exec:java
+
+
