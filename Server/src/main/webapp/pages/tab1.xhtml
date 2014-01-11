@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+	 <p:fieldset rendered="#{!windowController.windowModel.customerNewSecDialog}" legend="Kunde">
+		<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
+			<h:outputText value="Suche Kunde nach: " />
+			<p:selectOneMenu value="#" style="margin-top:3px;width:120px">
+				<f:selectItem itemLabel="Name" itemValue="0" />
+				<f:selectItem itemLabel="Geburtstag" itemValue="1" />
+			</p:selectOneMenu>
+			<p:inputText style="width:200px" value="test" />
+			<p:commandButton value="suchen" update="searchCustomer" actionListener="#{customerController.findAll()}"></p:commandButton>
+			<p:spacer width="80" height="20px" />
+			<p:commandButton style="width:150px;" update="tabView #{idPrefix}searchCustomer"  actionListener="#{customerController.createNewCustomer}" action="#{windowController.openCustomerNewSecDialog()}" value="registriere Kunde"></p:commandButton>
+		</h:panelGrid>
+
+		<p:dataTable id="searchCustomer" var="item" value="#{customerController.customerModel.searchResult}">  
+        <p:column headerText="Vorname Nachname">  
+            <h:outputText value="#{item.firstname} #{item.lastname} " />  
+        </p:column>   
+  
+        <p:column headerText="Geburtstag">  
+            <h:outputText value="" />  
+        </p:column>  
+  
+         <p:column headerText="" width="20">  
+         	 <p:panelGrid columns="2" >
+         	 	<p:commandLink title="Kunde editieren"   update=":form:tabView" styleClass="ui-icon ui-icon-pencil" actionListener="#{customerController.editCustomer(item)}" action="#{windowController.openCustomerNewSecDialog()}" value="" />   
+	            <p:commandLink title="Test" rendered="#{windowController.windowModel.customerSecDialog}" styleClass="ui-icon ui-icon-play" actionListener="#" action="#{windowController.closeCustomerSecDialog()}" update=":form:tabView:tabBooking" value="" />  
+            </p:panelGrid>
+        </p:column> 
+    </p:dataTable>  
+     <p:commandButton rendered="#{windowController.windowModel.customerSecDialog}" action="#{windowController.closeCustomerSecDialog()}" update="tabBooking" value="Zurück"></p:commandButton>
+    </p:fieldset>
+     <p:fieldset id="#{idPrefix}newCustomerField" rendered="#{windowController.windowModel.customerNewSecDialog}" legend="Registriere Kunde">
+		<p:panelGrid style="margin-bottom:10px;" cellpadding="5" styleClass="defaultBackgroundWhite">
+		<p:row>
+		<p:column>
+			<p:outputLabel value="Vorname" />
+			</p:column>
+			<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.firstname}"></p:inputText>
+			</p:column>
+				<p:column>
+			<h:outputLabel value="Nachname" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.lastname}"></p:inputText>
+			</p:column>
+		</p:row>
+		<p:row>	
+			<p:column>
+			<p:outputLabel value="Firmenname" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.companyname}"></p:inputText>
+			</p:column>
+				<p:column>
+			<p:outputLabel value="Rechnungsadresse" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.address}"></p:inputText>
+			</p:column>
+			</p:row>	
+			<p:row>	
+				<p:column>
+			<p:outputLabel  value="Tel" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.tel}"></p:inputText>
+			</p:column>
+				<p:column>
+			<p:outputLabel  value="Email" /> 
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.email}"></p:inputText>
+			</p:column>
+		</p:row>
+		<p:row>		
+			<p:column>
+			<p:outputLabel  value="Web" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.web}"></p:inputText>
+			</p:column>
+				<p:column>
+			<p:outputLabel value="Fax" />
+			</p:column>
+				<p:column>
+			<p:inputText  style="width:200px" value="#{customerController.customerModel.customerDTO.fax}"></p:inputText>
+			</p:column>
+		</p:row>	
+		<p:row>		
+				<p:column>
+			<p:outputLabel value="Rabatt" />
+			</p:column> 
+				<p:column>
+			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.rabat}"></p:inputText>
+			</p:column>
+			<p:column><p:spacer /></p:column>
+				<p:column><p:spacer /></p:column>
+		</p:row>
+		<p:row>		
+			 <p:column>
+				<p:outputLabel value="Notiz" />
+			</p:column>
+			<p:column colspan="3">
+				<p:inputTextarea style="width:100%" autoResize="false"  value="#{customerController.customerModel.customerDTO.notiz}"></p:inputTextarea>
+			</p:column>
+		</p:row>
+		</p:panelGrid>
+		 <p:commandButton immediate="true" actionListener="#{windowController.closeCustomerNewSecDialog(true)}" update="tabView" value="Abbrechen"></p:commandButton> 
+ 		<p:commandButton  action="#{windowController.closeCustomerNewSecDialog(false)}" actionListener="#{customerController.removeCustomer()}" update="tabView" rendered="#{windowController.tabCustomer}" value="Kunde löschen"></p:commandButton>
+   	
+ 		 <p:commandButton  process="newCustomerField"  action="#{windowController.closeCustomerNewSecDialog(false)}" actionListener="#{customerController.saveCustomer()}" update="tabView" value="#{windowController.tabCustomer ? 'Speichern' : 'Übernehmen in Reservierung'}"></p:commandButton>
+   		 	 
+    </p:fieldset>
+   </ui:composition>
+</html>
