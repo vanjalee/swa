@@ -1,0 +1,30 @@
+.ui-widget{
+    font-family:Arial,sans-serif;font-size: 90% !important;
+}
+.ui-fieldset .ui-fieldset-legend
+{
+	
+	border:0 !important;
+	
+	padding:0.3em !important;
+	margin:0.5em !important;
+		-moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;
+box-shadow: 0 0 5px #888;
+	
+}
+
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important;
+    vertical-align:top !important;
+     font-family:Arial,sans-serif;font-size: 1.1em !important;
+     
+}
+
+
+.twoColumnLayout 
+{
+	
+	width: 70%;
+} 
