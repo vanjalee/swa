@@ -22,9 +22,7 @@ public class Customer extends AbstractEntity {
 	private String lastname;
 	private Date birthdate;
 	private String address;
-	private String companyname;
 	private String notiz;
-	private int rabat;
 	private String tel;
 	private String email;
 	private String web;
@@ -62,28 +60,12 @@ public class Customer extends AbstractEntity {
 		this.address = address;
 	}
 
-	public String getCompanyname() {
-		return companyname;
-	}
-
-	public void setCompanyname(String companyname) {
-		this.companyname = companyname;
-	}
-
 	public String getNotiz() {
 		return notiz;
 	}
 
 	public void setNotiz(String notiz) {
 		this.notiz = notiz;
-	}
-
-	public int getRabat() {
-		return rabat;
-	}
-
-	public void setRabat(int rabat) {
-		this.rabat = rabat;
 	}
 
 	public String getTel() {
