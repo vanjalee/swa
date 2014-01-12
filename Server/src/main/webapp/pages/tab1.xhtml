@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+	 <p:fieldset  legend="Coins History">
+		<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
+			<h:outputText value="Search User with: " />
+			<p:selectOneMenu value="#" style="margin-top:3px;width:120px">
+				<f:selectItem itemLabel="Name" itemValue="0" />
+				<f:selectItem itemLabel="Geburtstag" itemValue="1" />
+			</p:selectOneMenu>
+			<p:inputText style="width:200px" value="test" />
+			<p:commandButton value="search" update="searchUser" actionListener="#{userController.findAll()}"></p:commandButton>
+			<p:spacer width="80" height="20px" />
+			<p:commandButton style="width:150px;"  action="#" value="Refresh"></p:commandButton>
+		</h:panelGrid>
+
+		<p:dataTable id="searchUser" var="item" value="#{userController.userModel.searchResult}">  
+        <p:column headerText="Firstname Lastname">  
+            <h:outputText value="#{item.firstname} #{item.lastname} " />  
+        </p:column>   
+  
+        <p:column headerText="Birthdate">  
+            <h:outputText value="" />  
+        </p:column>  
+  
+         
+    </p:dataTable>  
+  </p:fieldset>
+   </ui:composition>
+</html>
