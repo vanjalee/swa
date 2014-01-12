@@ -1,5 +1,7 @@
 package at.ac.tuwien.swa.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,6 +28,24 @@ public class PeerService extends AbstractCrudService<Peer, PeerRepository> {
 		return peer.getUser();
 	}
 
+	// @Async should be async
+	public String connectPeer(Peer peer, String fingerprint) {
+		Assert.notNull(peer);
+		Assert.notNull(fingerprint);
+
+		// call webservice
+		return null;
+	}
+
+	public Peer randomPeer(User loggedInUser, String fingerprint) {
+		Assert.notNull(loggedInUser);
+		List<Peer> peers = findAll();
+		if (!peers.isEmpty()) {
+			return peers.get(random(0, peers.size()));
+		}
+		return null;
+	}
+
 	// todo needed in the model document
 	public void registerPeer(User user, String uuid, String ipAddress) {
 		Assert.notNull(user);
@@ -50,6 +70,10 @@ public class PeerService extends AbstractCrudService<Peer, PeerRepository> {
 		Assert.notNull(peer);
 		peer.setOnline(false);
 		save(peer);
+	}
+
+	private static int random(int low, int high) {
+		return (int) (Math.random() * (high - low) + low);
 	}
 
 	@Override
