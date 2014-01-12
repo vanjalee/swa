@@ -31,11 +31,11 @@ public class WindowController {
 	}
 
 	private void clearTabStates() {
-		closeCustomerSecDialog();
-		closeCustomerNewSecDialog(true);
+		closeUserSecDialog();
+		closeUserNewSecDialog(true);
 	}
 
-	public boolean isTabCustomer() {
+	public boolean isTabUser() {
 		return windowModel.getCurrentTabIndex() == 2;
 	}
 
@@ -43,22 +43,22 @@ public class WindowController {
 		return windowModel.getCurrentTabIndex() == 1;
 	}
 
-	public void openCustomerSecDialog() {
-		windowModel.setCustomerSecDialog(true);
+	public void openUserSecDialog() {
+		windowModel.setUserSecDialog(true);
 	}
 
-	public void openCustomerNewSecDialog() {
-		windowModel.setCustomerNewSecDialog(true);
+	public void openUserNewSecDialog() {
+		windowModel.setUserNewSecDialog(true);
 	}
 
-	public void closeCustomerSecDialog() {
-		windowModel.setCustomerSecDialog(false);
+	public void closeUserSecDialog() {
+		windowModel.setUserSecDialog(false);
 	}
 
-	public void closeCustomerNewSecDialog(boolean cancel) {
-		windowModel.setCustomerNewSecDialog(false);
-		if (!cancel && windowModel.isCustomerSecDialog()) {
-			closeCustomerSecDialog();
+	public void closeUserNewSecDialog(boolean cancel) {
+		windowModel.setUserNewSecDialog(false);
+		if (!cancel && windowModel.isUserSecDialog()) {
+			closeUserSecDialog();
 		}
 	}
 

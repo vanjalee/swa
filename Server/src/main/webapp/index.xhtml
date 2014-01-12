@@ -24,14 +24,14 @@
 					<h:panelGroup rendered="#{!loginController.loginModel.login}" layout="block"
 						style="text-align:right">
 						<p:inputText placeholder="Login" style="margin-right:5px"></p:inputText>
-						<p:password placeholder="Passwort" style="margin-right:5px"></p:password>
-						<p:commandButton value="Anmelden"
+						<p:password placeholder="Password" style="margin-right:5px"></p:password>
+						<p:commandButton value="Login"
 							action="#{loginController.doLogin}" update="panelLogin,:panel"
 							style="margin-left:5px"></p:commandButton>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{loginController.loginModel.login}" layout="block"
 						style="text-align:right">
-						<p:commandButton value="Abmelden"
+						<p:commandButton value="Logout"
 							action="#{loginController.doLogout}" update="panelLogin,:panel"
 							style="margin-left:5px"></p:commandButton>
 					</h:panelGroup>
@@ -44,12 +44,12 @@
 				<p:tabView id="tabView" activeIndex="#{windowController.windowModel.currentTabIndex}" rendered="#{!loginController.loginModel.login}">
 					<p:ajax event="tabChange" update="tabView" listener="#{windowController.onTabChange}" />
 					
-					<p:tab title="tab1" closable="false">
+					<p:tab title="User" closable="false">
 						<h:panelGroup id="customer">
 							<ui:include src="/pages/tab1.xhtml" />
 						</h:panelGroup>
 					</p:tab>
-					<p:tab title="tab2" closable="false" disabled="false">
+					<p:tab title="Statistics" closable="false" disabled="false">
 						<h:panelGroup id="statistics">
 							<ui:include src="/pages/tab2.xhtml" />
 						</h:panelGroup>

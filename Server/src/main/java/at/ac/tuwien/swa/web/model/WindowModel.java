@@ -6,9 +6,9 @@ import javax.inject.Named;
 public class WindowModel {
 	private int currentTabIndex = 0;
 
-	private boolean customerNewSecDialog;
+	private boolean userNewSecDialog;
 
-	private boolean customerSecDialog;
+	private boolean userSecDialog;
 
 	public void setCurrentTabIndex(int currentTabIndex) {
 		this.currentTabIndex = currentTabIndex;
@@ -18,19 +18,19 @@ public class WindowModel {
 		return currentTabIndex;
 	}
 
-	public boolean isCustomerNewSecDialog() {
-		return customerNewSecDialog;
+	public boolean isUserNewSecDialog() {
+		return userNewSecDialog;
 	}
 
-	public boolean isCustomerSecDialog() {
-		return customerSecDialog;
+	public boolean isUserSecDialog() {
+		return userSecDialog;
 	}
 
-	public void setCustomerSecDialog(boolean customerSecDialog) {
-		this.customerSecDialog = customerSecDialog;
+	public void setUserSecDialog(boolean userSecDialog) {
+		this.userSecDialog = userSecDialog;
 	}
 
-	public void setCustomerNewSecDialog(boolean customerNewSecDialog) {
-		this.customerNewSecDialog = customerNewSecDialog;
+	public void setUserNewSecDialog(boolean userNewSecDialog) {
+		this.userNewSecDialog = userNewSecDialog;
 	}
 }

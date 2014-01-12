@@ -20,10 +20,10 @@
 	
 	<bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 	   <property name="dataSource" ref="dataSource" />
-	   <property name="packagesToScan" value="at.ac.tuwien.swa" />
+	   <property name="packagesToScan" value="at.ac.tuwien.swa.entities" />
 	   <property name="jpaVendorAdapter">
 	      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-	         <property name="showSql" value="false" />
+	         <property name="showSql" value="true" />
 	         <property name="generateDdl" value="true" />
 	         <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />	        
 	      </bean>

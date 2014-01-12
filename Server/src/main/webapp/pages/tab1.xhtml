@@ -7,59 +7,59 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-	 <p:fieldset rendered="#{!windowController.windowModel.customerNewSecDialog}" legend="Kunde">
+	 <p:fieldset rendered="#{!windowController.windowModel.userNewSecDialog}" legend="User">
 		<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
-			<h:outputText value="Suche Kunde nach: " />
+			<h:outputText value="Search User with: " />
 			<p:selectOneMenu value="#" style="margin-top:3px;width:120px">
 				<f:selectItem itemLabel="Name" itemValue="0" />
 				<f:selectItem itemLabel="Geburtstag" itemValue="1" />
 			</p:selectOneMenu>
 			<p:inputText style="width:200px" value="test" />
-			<p:commandButton value="suchen" update="searchCustomer" actionListener="#{customerController.findAll()}"></p:commandButton>
+			<p:commandButton value="search" update="searchUser" actionListener="#{userController.findAll()}"></p:commandButton>
 			<p:spacer width="80" height="20px" />
-			<p:commandButton style="width:150px;" update="tabView #{idPrefix}searchCustomer"  actionListener="#{customerController.createNewCustomer}" action="#{windowController.openCustomerNewSecDialog()}" value="registriere Kunde"></p:commandButton>
+			<p:commandButton style="width:150px;" update="tabView #{idPrefix}searchUser"  actionListener="#{userController.createNewUser}" action="#{windowController.openUserNewSecDialog()}" value="register User"></p:commandButton>
 		</h:panelGrid>
 
-		<p:dataTable id="searchCustomer" var="item" value="#{customerController.customerModel.searchResult}">  
-        <p:column headerText="Vorname Nachname">  
+		<p:dataTable id="searchUser" var="item" value="#{userController.userModel.searchResult}">  
+        <p:column headerText="Firstname Lastname">  
             <h:outputText value="#{item.firstname} #{item.lastname} " />  
         </p:column>   
   
-        <p:column headerText="Geburtstag">  
+        <p:column headerText="Birthdate">  
             <h:outputText value="" />  
         </p:column>  
   
          <p:column headerText="" width="20">  
          	 <p:panelGrid columns="2" >
-         	 	<p:commandLink title="Kunde editieren"   update=":form:tabView" styleClass="ui-icon ui-icon-pencil" actionListener="#{customerController.editCustomer(item)}" action="#{windowController.openCustomerNewSecDialog()}" value="" />   
-	            <p:commandLink title="Test" rendered="#{windowController.windowModel.customerSecDialog}" styleClass="ui-icon ui-icon-play" actionListener="#" action="#{windowController.closeCustomerSecDialog()}" update=":form:tabView:tabBooking" value="" />  
+         	 	<p:commandLink title="User edit"   update=":form:tabView" styleClass="ui-icon ui-icon-pencil" actionListener="#{userController.editUser(item)}" action="#{windowController.openUserNewSecDialog()}" value="" />   
+	            <p:commandLink title="Test" rendered="#{windowController.windowModel.userSecDialog}" styleClass="ui-icon ui-icon-play" actionListener="#" action="#{windowController.closeUserSecDialog()}" update=":form:tabView:tabBooking" value="" />  
             </p:panelGrid>
         </p:column> 
     </p:dataTable>  
-     <p:commandButton rendered="#{windowController.windowModel.customerSecDialog}" action="#{windowController.closeCustomerSecDialog()}" update="tabBooking" value="Zurück"></p:commandButton>
+     <p:commandButton rendered="#{windowController.windowModel.userSecDialog}" action="#{windowController.closeUserSecDialog()}" update="tabBooking" value="Zurück"></p:commandButton>
     </p:fieldset>
-     <p:fieldset id="#{idPrefix}newCustomerField" rendered="#{windowController.windowModel.customerNewSecDialog}" legend="Registriere Kunde">
+     <p:fieldset id="#{idPrefix}newUserField" rendered="#{windowController.windowModel.userNewSecDialog}" legend="Register User">
 		<p:panelGrid style="margin-bottom:10px;" cellpadding="5" styleClass="defaultBackgroundWhite">
 		<p:row>
 		<p:column>
-			<p:outputLabel value="Vorname" />
+			<p:outputLabel value="Firstname" />
 			</p:column>
 			<p:column>
-			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.firstname}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.firstname}"></p:inputText>
 			</p:column>
 				<p:column>
-			<h:outputLabel value="Nachname" />
+			<h:outputLabel value="Lastname" />
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.lastname}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.lastname}"></p:inputText>
 			</p:column>
 		</p:row>
 		<p:row>	
 			<p:column>
-			<p:outputLabel value="Rechnungsadresse" />
+			<p:outputLabel value="Address" />
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.address}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.address}"></p:inputText>
 			</p:column>
 			</p:row>	
 			<p:row>	
@@ -67,13 +67,13 @@
 			<p:outputLabel  value="Tel" />
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.tel}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.tel}"></p:inputText>
 			</p:column>
 				<p:column>
 			<p:outputLabel  value="Email" /> 
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.email}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.email}"></p:inputText>
 			</p:column>
 		</p:row>
 		<p:row>		
@@ -81,29 +81,29 @@
 			<p:outputLabel  value="Web" />
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{customerController.customerModel.customerDTO.web}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.web}"></p:inputText>
 			</p:column>
 				<p:column>
 			<p:outputLabel value="Fax" />
 			</p:column>
 				<p:column>
-			<p:inputText  style="width:200px" value="#{customerController.customerModel.customerDTO.fax}"></p:inputText>
+			<p:inputText  style="width:200px" value="#{userController.userModel.user.fax}"></p:inputText>
 			</p:column>
 		</p:row>	
 		
 		<p:row>		
 			 <p:column>
-				<p:outputLabel value="Notiz" />
+				<p:outputLabel value="Note" />
 			</p:column>
 			<p:column colspan="3">
-				<p:inputTextarea style="width:100%" autoResize="false"  value="#{customerController.customerModel.customerDTO.notiz}"></p:inputTextarea>
+				<p:inputTextarea style="width:100%" autoResize="false"  value="#{userController.userModel.user.notiz}"></p:inputTextarea>
 			</p:column>
 		</p:row>
 		</p:panelGrid>
-		 <p:commandButton immediate="true" actionListener="#{windowController.closeCustomerNewSecDialog(true)}" update="tabView" value="Abbrechen"></p:commandButton> 
- 		<p:commandButton  action="#{windowController.closeCustomerNewSecDialog(false)}" actionListener="#{customerController.removeCustomer()}" update="tabView" rendered="#{windowController.tabCustomer}" value="Kunde löschen"></p:commandButton>
+		 <p:commandButton immediate="true" actionListener="#{windowController.closeUserNewSecDialog(true)}" update="tabView" value="Cancel"></p:commandButton> 
+ 		<p:commandButton  action="#{windowController.closeUserNewSecDialog(false)}" actionListener="#{userController.removeUser()}" update="tabView" rendered="#{windowController.tabUser}" value="User delete"></p:commandButton>
    	
- 		 <p:commandButton  process="newCustomerField"  action="#{windowController.closeCustomerNewSecDialog(false)}" actionListener="#{customerController.saveCustomer()}" update="tabView" value="Speichern"></p:commandButton>
+ 		 <p:commandButton  process="newUserField"  action="#{windowController.closeUserNewSecDialog(false)}" actionListener="#{userController.saveUser()}" update="tabView" value="Save"></p:commandButton>
    		 	 
     </p:fieldset>
    </ui:composition>
