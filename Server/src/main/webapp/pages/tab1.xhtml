@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-	 <p:fieldset rendered="#{!windowController.windowModel.userNewSecDialog}" legend="User">
+	 <p:fieldset  legend="Coins History">
 		<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
 			<h:outputText value="Search User with: " />
 			<p:selectOneMenu value="#" style="margin-top:3px;width:120px">
@@ -17,7 +17,7 @@
 			<p:inputText style="width:200px" value="test" />
 			<p:commandButton value="search" update="searchUser" actionListener="#{userController.findAll()}"></p:commandButton>
 			<p:spacer width="80" height="20px" />
-			<p:commandButton style="width:150px;" update="tabView #{idPrefix}searchUser"  actionListener="#{userController.createNewUser}" action="#{windowController.openUserNewSecDialog()}" value="register User"></p:commandButton>
+			<p:commandButton style="width:150px;"  action="#" value="Refresh"></p:commandButton>
 		</h:panelGrid>
 
 		<p:dataTable id="searchUser" var="item" value="#{userController.userModel.searchResult}">  
@@ -29,78 +29,8 @@
             <h:outputText value="" />  
         </p:column>  
   
-         <p:column headerText="" width="20">  
-         	 <p:panelGrid columns="2" >
-         	 	<p:commandLink title="User edit"   update=":form:tabView" styleClass="ui-icon ui-icon-pencil" actionListener="#{userController.editUser(item)}" action="#{windowController.openUserNewSecDialog()}" value="" />   
-	            <p:commandLink title="Test" rendered="#{windowController.windowModel.userSecDialog}" styleClass="ui-icon ui-icon-play" actionListener="#" action="#{windowController.closeUserSecDialog()}" update=":form:tabView:tabBooking" value="" />  
-            </p:panelGrid>
-        </p:column> 
+         
     </p:dataTable>  
-     <p:commandButton rendered="#{windowController.windowModel.userSecDialog}" action="#{windowController.closeUserSecDialog()}" update="tabBooking" value="Zurück"></p:commandButton>
-    </p:fieldset>
-     <p:fieldset id="#{idPrefix}newUserField" rendered="#{windowController.windowModel.userNewSecDialog}" legend="Register User">
-		<p:panelGrid style="margin-bottom:10px;" cellpadding="5" styleClass="defaultBackgroundWhite">
-		<p:row>
-		<p:column>
-			<p:outputLabel value="Username" />
-			</p:column>
-			<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.username}"></p:inputText>
-			</p:column>
-				<p:column>
-			<h:outputLabel value="Password" />
-			</p:column>
-				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.password}"></p:inputText>
-			</p:column>
-		</p:row>
-		<p:row>	
-			<p:column>
-			<p:outputLabel value="Firstname" />
-			</p:column>
-				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.firstname}"></p:inputText>
-			</p:column>
-			<p:column>
-			<p:outputLabel  value="Lastname" />
-			</p:column>
-				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.lastname}"></p:inputText>
-			</p:column>
-			</p:row>	
-			<p:row>	
-				
-				<p:column>
-			<p:outputLabel  value="Email" /> 
-			</p:column>
-				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.email}"></p:inputText>
-			</p:column>
-		</p:row>
-		<p:row>		
-			<p:column>
-			<p:outputLabel  value="Birthdate" />
-			</p:column>
-				<p:column>
-			
-			<p:calendar style="width:200px" value="#{userController.userModel.user.birthdate}"></p:calendar>
-			</p:column>
-		</p:row>	
-		
-		<p:row>		
-			 <p:column>
-				<p:outputLabel value="Note" />
-			</p:column>
-			<p:column colspan="3">
-				<p:inputTextarea style="width:100%" autoResize="false"  value="#{userController.userModel.user.notiz}"></p:inputTextarea>
-			</p:column>
-		</p:row>
-		</p:panelGrid>
-		 <p:commandButton immediate="true" actionListener="#{windowController.closeUserNewSecDialog(true)}" update="tabView" value="Cancel"></p:commandButton> 
- 		<p:commandButton  action="#{windowController.closeUserNewSecDialog(false)}" actionListener="#{userController.removeUser()}" update="tabView" rendered="#{windowController.tabUser}" value="User delete"></p:commandButton>
-   	
- 		 <p:commandButton  process="newUserField"  action="#{windowController.closeUserNewSecDialog(false)}" actionListener="#{userController.saveUser()}" update="tabView" value="Save"></p:commandButton>
-   		 	 
-    </p:fieldset>
+  </p:fieldset>
    </ui:composition>
 </html>

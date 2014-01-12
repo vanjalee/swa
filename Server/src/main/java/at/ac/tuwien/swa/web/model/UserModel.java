@@ -8,7 +8,7 @@ import at.ac.tuwien.swa.entities.User;
 
 @Named
 public class UserModel {
-	private User user;
+	private User user = new User();
 
 	private List<User> searchResult;
 

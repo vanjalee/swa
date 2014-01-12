@@ -27,39 +27,5 @@ public class WindowController {
 	public void onTabChange(TabChangeEvent event) {
 		TabView tabView = (TabView) event.getComponent();
 		windowModel.setCurrentTabIndex(tabView.getChildren().indexOf(event.getTab()));
-		clearTabStates();
 	}
-
-	private void clearTabStates() {
-		closeUserSecDialog();
-		closeUserNewSecDialog(true);
-	}
-
-	public boolean isTabUser() {
-		return windowModel.getCurrentTabIndex() == 2;
-	}
-
-	public boolean isTabRoom() {
-		return windowModel.getCurrentTabIndex() == 1;
-	}
-
-	public void openUserSecDialog() {
-		windowModel.setUserSecDialog(true);
-	}
-
-	public void openUserNewSecDialog() {
-		windowModel.setUserNewSecDialog(true);
-	}
-
-	public void closeUserSecDialog() {
-		windowModel.setUserSecDialog(false);
-	}
-
-	public void closeUserNewSecDialog(boolean cancel) {
-		windowModel.setUserNewSecDialog(false);
-		if (!cancel && windowModel.isUserSecDialog()) {
-			closeUserSecDialog();
-		}
-	}
-
 }

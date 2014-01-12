@@ -13,7 +13,7 @@
 
 
 	<h:body>
-	<h:panelGroup layout="block"
+	<h:panelGroup id="all" layout="block"
 		style="padding-left:5%; padding-right:5%;min-width:900px;">
 		<h:panelGroup layout="block" style="margin: 10px;">
 			<h:panelGroup layout="block" style="text-align:center">
@@ -21,18 +21,18 @@
 			</h:panelGroup>
 			<h:form>
 				<h:panelGroup id="panelLogin">
-					<h:panelGroup rendered="#{!loginController.loginModel.login}" layout="block"
+					<h:panelGroup rendered="#{!loginController.loginModel.login}" onclick="tabView.select(0);" layout="block"
 						style="text-align:right">
-						<p:inputText placeholder="Login" style="margin-right:5px"></p:inputText>
-						<p:password placeholder="Password" style="margin-right:5px"></p:password>
+						<p:inputText placeholder="Login" value="#{userController.userModel.user.username}" style="margin-right:5px"></p:inputText>
+						<p:password placeholder="Password" value="#{userController.userModel.user.password}" style="margin-right:5px"></p:password>
 						<p:commandButton value="Login"
-							action="#{loginController.doLogin}" update="panelLogin,:panel"
+							action="#{loginController.doLogin}" update=":all,:form:tabView"
 							style="margin-left:5px"></p:commandButton>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{loginController.loginModel.login}" layout="block"
 						style="text-align:right">
-						<p:commandButton value="Logout"
-							action="#{loginController.doLogout}" update="panelLogin,:panel"
+						<p:commandButton value="Logout" 
+							action="#{loginController.doLogout}"  update=":all"
 							style="margin-left:5px"></p:commandButton>
 					</h:panelGroup>
 				</h:panelGroup>
@@ -40,21 +40,36 @@
 		</h:panelGroup>
 		<h:panelGroup id="panel" layout="block">
 			<h:form id = "form">
-				<p:growl id="growl" showDetail="true" />
-				<p:tabView id="tabView" activeIndex="#{windowController.windowModel.currentTabIndex}" rendered="#{!loginController.loginModel.login}">
-					<p:ajax event="tabChange" update="tabView" listener="#{windowController.onTabChange}" />
+				
+				<h:panelGroup rendered="#{!loginController.loginModel.login}">
+					<p:fieldset legend="Register User">
+						<ui:include src="/pages/registerUser.xhtml" />
+					</p:fieldset>
+				</h:panelGroup>	
+				<p:tabView id="tabView" widgetVar="tabView" activeIndex="#{windowController.windowModel.currentTabIndex}" rendered="#{loginController.loginModel.login}">
+					<p:ajax event="tabChange" listener="#{windowController.onTabChange}" />
 					
-					<p:tab title="User" closable="false">
+					<p:tab title="Coins History" closable="false">
 						<h:panelGroup id="customer">
 							<ui:include src="/pages/tab1.xhtml" />
 						</h:panelGroup>
 					</p:tab>
-					<p:tab title="Statistics" closable="false" disabled="false">
-						<h:panelGroup id="statistics">
+					<p:tab title="Requests History" closable="false">
+						<h:panelGroup id="requests">
 							<ui:include src="/pages/tab2.xhtml" />
+						</h:panelGroup>
+					</p:tab>
+					<p:tab title="User Settings" closable="false" disabled="false">
+						<h:panelGroup id="settings">
+							 <p:fieldset legend="User Settings">
+								<ui:include src="/pages/registerUser.xhtml" />
+							</p:fieldset>	
 						</h:panelGroup>
 					</p:tab>	
 				</p:tabView>
+				
+				 <p:messages id="messages" showDetail="false" autoUpdate="false" closable="true" />  
+  
 			</h:form>
 		</h:panelGroup>
 	</h:panelGroup>

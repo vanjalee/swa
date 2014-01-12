@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+        
+		<p:panelGrid id="panelUserSettings" style="margin-bottom:10px;" cellpadding="5" styleClass="defaultBackgroundWhite">
+		<p:row>
+		<p:column>
+			<p:outputLabel value="Username" />
+			</p:column>
+			<p:column>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.username}" disabled="#{loginController.loginModel.login}"></p:inputText>
+			</p:column>
+				<p:column>
+			<h:outputLabel value="Password" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.password}" disabled="#{loginController.loginModel.login}"></p:inputText>
+			</p:column>
+		</p:row>
+		<p:row>	
+			<p:column>
+			<p:outputLabel value="Firstname" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.firstname}"></p:inputText>
+			</p:column>
+			<p:column>
+			<p:outputLabel  value="Lastname" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.lastname}"></p:inputText>
+			</p:column>
+			</p:row>	
+			<p:row>	
+				
+				<p:column>
+			<p:outputLabel  value="Email" /> 
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.email}"></p:inputText>
+			</p:column>
+		</p:row>
+		<p:row>		
+			<p:column>
+			<p:outputLabel  value="Birthdate" />
+			</p:column>
+				<p:column>
+			
+			<p:calendar style="width:200px" value="#{userController.userModel.user.birthdate}"></p:calendar>
+			</p:column>
+		</p:row>	
+		
+		<p:row>		
+			 <p:column>
+				<p:outputLabel value="Note" />
+			</p:column>
+			<p:column colspan="3">
+				<p:inputTextarea style="width:100%" autoResize="false"  value="#{userController.userModel.user.notiz}"></p:inputTextarea>
+			</p:column>
+		</p:row>
+		</p:panelGrid>
+		
+		<p:commandButton action="#{userController.removeUser()}" update="@all" rendered="#{loginController.loginModel.login}" value="Delete"></p:commandButton>
+   	
+ 		 <p:commandButton  rendered="#{loginController.loginModel.login}" process="@form"   action="#{userController.saveUser()}" update="@form" value="Save"></p:commandButton>
+   	     <p:commandButton  rendered="#{!loginController.loginModel.login}" process="@form"   action="#{userController.saveUser()}" update="@all" value="Register"></p:commandButton>
+   		
+  
+   </ui:composition>
+</html>

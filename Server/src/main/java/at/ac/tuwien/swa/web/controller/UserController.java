@@ -1,5 +1,7 @@
 package at.ac.tuwien.swa.web.controller;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -7,7 +9,9 @@ import org.springframework.context.annotation.Scope;
 
 import at.ac.tuwien.swa.entities.User;
 import at.ac.tuwien.swa.service.UserService;
+import at.ac.tuwien.swa.web.model.LoginModel;
 import at.ac.tuwien.swa.web.model.UserModel;
+import at.ac.tuwien.swa.web.model.WindowModel;
 
 @Named
 @Scope("request")
@@ -21,10 +25,35 @@ public class UserController {
 	@Inject
 	UserService userService;
 
-	public void saveUser() {
-		userService.save(userModel.getUser());
+	@Inject
+	LoginModel loginModel;
 
-		findAll();
+	@Inject
+	WindowModel windowModel;
+
+	public void registerUser() {
+		if (!userService.usernameExists(userModel.getUser().getUsername())) {
+			userService.save(userModel.getUser());
+			windowModel.setCurrentTabIndex(0);
+			loginModel.setLogin(true);
+		}
+		else {
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "username: '" + userModel.getUser().getUsername() + "' is not available", null));
+			userModel.getUser().setUsername(null);
+			userModel.getUser().setPassword(null);
+		}
+
+	}
+
+	public void saveUser() {
+		if (loginModel.isLogin()) {
+			userService.save(userModel.getUser());
+			findAll();
+		}
+		else {
+			registerUser();
+		}
 	}
 
 	public void setNewUser(boolean newUser) {
@@ -39,8 +68,9 @@ public class UserController {
 
 		userService.delete(userModel.getUser());
 		userModel.setUser(new User());
+		loginModel.setLogin(false);
 
-		findAll();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "user successfully removed", null));
 	}
 
 	public void editUser(User user) {

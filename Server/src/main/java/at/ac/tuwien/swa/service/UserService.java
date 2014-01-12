@@ -27,6 +27,10 @@ public class UserService extends AbstractCrudService<User, UserRepository> {
 		return null;
 	}
 
+	public boolean usernameExists(String username) {
+		return !userRepository.findAllByUsername(username).isEmpty();
+	}
+
 	@Override
 	public UserRepository getRepository() {
 		return userRepository;

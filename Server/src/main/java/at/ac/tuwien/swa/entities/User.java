@@ -14,6 +14,11 @@ import javax.persistence.Table;
 @Table
 public class User extends AbstractEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8452165418485031475L;
+
 	public User() {
 
 	}
