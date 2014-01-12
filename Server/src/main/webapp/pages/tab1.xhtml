@@ -118,7 +118,7 @@
 		 <p:commandButton immediate="true" actionListener="#{windowController.closeCustomerNewSecDialog(true)}" update="tabView" value="Abbrechen"></p:commandButton> 
  		<p:commandButton  action="#{windowController.closeCustomerNewSecDialog(false)}" actionListener="#{customerController.removeCustomer()}" update="tabView" rendered="#{windowController.tabCustomer}" value="Kunde löschen"></p:commandButton>
    	
- 		 <p:commandButton  process="newCustomerField"  action="#{windowController.closeCustomerNewSecDialog(false)}" actionListener="#{customerController.saveCustomer()}" update="tabView" value="#{windowController.tabCustomer ? 'Speichern' : 'Übernehmen in Reservierung'}"></p:commandButton>
+ 		 <p:commandButton  process="newCustomerField"  action="#{windowController.closeCustomerNewSecDialog(false)}" actionListener="#{customerController.saveCustomer()}" update="tabView" value="Speichern"></p:commandButton>
    		 	 
     </p:fieldset>
    </ui:composition>
