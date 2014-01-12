@@ -1,27 +1,33 @@
 package at.ac.tuwien.swa.service;
 
+import java.io.Serializable;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public abstract class AbstractCrudService<T> {
+import at.ac.tuwien.swa.entities.AbstractEntity;
 
-	@Inject
-	JpaRepository<T, Long> crudRepository;
+public abstract class AbstractCrudService<T extends AbstractEntity, U> {
+	JpaRepository<T, Serializable> repository;
+
+	@SuppressWarnings("unchecked")
+	public JpaRepository<T, Serializable> getCrudRepository() {
+		return (JpaRepository<T, Serializable>) getRepository();
+	}
+
+	public abstract U getRepository();
 
 	public void save(T item) {
-		crudRepository.save(item);
+		getCrudRepository().save(item);
 	}
 
 	public void delete(T item) {
-		crudRepository.delete(item);
+		getCrudRepository().delete(item);
 
 	}
 
 	public List<T> findAll() {
-		return crudRepository.findAll();
+		return getCrudRepository().findAll();
 	}
 
 }

@@ -1,5 +1,6 @@
 package at.ac.tuwien.swa.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1442654264326184623L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

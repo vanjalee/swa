@@ -42,33 +42,34 @@
 		<p:panelGrid style="margin-bottom:10px;" cellpadding="5" styleClass="defaultBackgroundWhite">
 		<p:row>
 		<p:column>
-			<p:outputLabel value="Firstname" />
+			<p:outputLabel value="Username" />
 			</p:column>
 			<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.firstname}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.username}"></p:inputText>
 			</p:column>
 				<p:column>
-			<h:outputLabel value="Lastname" />
+			<h:outputLabel value="Password" />
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.lastname}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.password}"></p:inputText>
 			</p:column>
 		</p:row>
 		<p:row>	
 			<p:column>
-			<p:outputLabel value="Address" />
+			<p:outputLabel value="Firstname" />
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.address}"></p:inputText>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.firstname}"></p:inputText>
+			</p:column>
+			<p:column>
+			<p:outputLabel  value="Lastname" />
+			</p:column>
+				<p:column>
+			<p:inputText style="width:200px" value="#{userController.userModel.user.lastname}"></p:inputText>
 			</p:column>
 			</p:row>	
 			<p:row>	
-				<p:column>
-			<p:outputLabel  value="Tel" />
-			</p:column>
-				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.tel}"></p:inputText>
-			</p:column>
+				
 				<p:column>
 			<p:outputLabel  value="Email" /> 
 			</p:column>
@@ -78,16 +79,11 @@
 		</p:row>
 		<p:row>		
 			<p:column>
-			<p:outputLabel  value="Web" />
+			<p:outputLabel  value="Birthdate" />
 			</p:column>
 				<p:column>
-			<p:inputText style="width:200px" value="#{userController.userModel.user.web}"></p:inputText>
-			</p:column>
-				<p:column>
-			<p:outputLabel value="Fax" />
-			</p:column>
-				<p:column>
-			<p:inputText  style="width:200px" value="#{userController.userModel.user.fax}"></p:inputText>
+			
+			<p:calendar style="width:200px" value="#{userController.userModel.user.birthdate}"></p:calendar>
 			</p:column>
 		</p:row>	
 		
