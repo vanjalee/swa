@@ -1,0 +1,2 @@
+Use this command to install fingerprint jar to your local maven repository (adapt paths to your jar file):
+mvn install:install-file -DlocalRepositoryPath=.m2\repository -DcreateChecksum=true -Dpackaging=jar -Dfile=C:\Users\vanjalee\Desktop\fingerprint.jar -DgroupId=at.ac.tuwien.infosys.swa.audio -DartifactId=fingerprint -Dversion=0.1.1
