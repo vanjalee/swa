@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -29,6 +30,7 @@ import ac.at.tuwien.infosys.swa.audio.FingerprintSystem;
 import at.ac.tuwien.swa.control.library.Library;
 import at.ac.tuwien.swa.control.library.dto.Song;
 import at.ac.tuwien.swa.control.library.dto.Songs;
+import at.ac.tuwien.swa.service.dto.AnalysisResult;
 
 public class LibraryImpl implements Library {
 
@@ -60,6 +62,7 @@ public class LibraryImpl implements Library {
 	 * 
 	 * @see at.ac.tuwien.swa.library.Library#loadLibrary()
 	 */
+	@PostConstruct
 	@Override
 	public void loadLibrary() {
 		try {
@@ -162,6 +165,16 @@ public class LibraryImpl implements Library {
 		return song;
 	}
 
+	@Override
+	public AnalysisResult match(Fingerprint fingerprint) {
+		for (String key : library.keySet()) {
+			if (fingerprint.match(library.get(key).getFingerprint()) > -1) {
+				return new AnalysisResult(library.get(key).getArtist(), library.get(key).getTitle(), true);				
+			}
+		}
+		return new AnalysisResult(null, null, false);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

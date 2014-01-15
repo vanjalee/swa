@@ -13,6 +13,7 @@ public class PeerInformation implements Serializable {
 	private PeerType peerType;
 	private Integer port;
 	private String serverWsdl;
+	private String localWsdl;
 	private String libraryPath;
 	private String username;
 	private String password;
@@ -21,7 +22,8 @@ public class PeerInformation implements Serializable {
 	}
 
 	public PeerInformation(PeerType peerType, Integer port, String serverWsdl,
-			String libraryPath, String username, String password) {
+			String localWsdl, String libraryPath, String username,
+			String password) {
 		this.peerType = peerType;
 		this.port = port;
 		this.serverWsdl = serverWsdl;
@@ -76,6 +78,14 @@ public class PeerInformation implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getLocalWsdl() {
+		return localWsdl;
+	}
+
+	public void setLocalWsdl(String localWsdl) {
+		this.localWsdl = localWsdl;
 	}
 
 }

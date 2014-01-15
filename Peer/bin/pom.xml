@@ -16,11 +16,6 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>juli</artifactId>
-			<version>6.0.37</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-app</artifactId>
 			<version>1.4</version>
@@ -240,12 +235,9 @@
 				</executions>
 				<configuration>
 					<mainClass>at.ac.tuwien.swa.Peer</mainClass>
-					<includeProjectDependencies>true</includeProjectDependencies>
-					<includePluginDependencies>true</includePluginDependencies>
 					<arguments>
 						<argument>D:\\musiclibrary\</argument>
-						<argument>127.0.0.1:8080/server/serverService?wsdl</argument>
-						<argument>127.0.0.1</argument>
+						<argument>localhost:8080/server/serverService?wsdl</argument>
 						<argument>9050</argument>
 						<argument>EDGE</argument>
 						<argument>peer1</argument>
