@@ -164,7 +164,7 @@
 		<dependency>
 			<groupId>org</groupId>
 			<artifactId>jaudiotagger</artifactId>
-			<version>2.0.3</version>
+			<version>2.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>at.ac.tuwien.infosys.swa.audio</groupId>
@@ -207,7 +207,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<url>${project.basedir}/lib</url>
+			<url>file://${project.basedir}/lib</url> <!-- file is important -->
 		</repository>
 		<repository>
 			<id>java.net</id>
