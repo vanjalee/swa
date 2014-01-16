@@ -120,7 +120,7 @@ public class Peer {
 			String webRoot = currentDir + "/src/main" + File.separatorChar + "webapp/";
 			Tomcat tomcat = new Tomcat();
 			tomcat.setBaseDir(tomcatDir);
-			tomcat.setPort(8080);
+			tomcat.setPort(port);
 			Context context = tomcat.addWebapp("/Peer", webRoot);
 
 			// Add AprLifecycleListener
