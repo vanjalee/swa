@@ -7,3 +7,5 @@
 *.project
 *.classpath
 bin/
+/bin
+**/bin
