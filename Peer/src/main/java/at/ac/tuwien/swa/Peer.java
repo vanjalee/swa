@@ -117,20 +117,24 @@ public class Peer {
 		try {
 			String currentDir = new File(".").getCanonicalPath();
 			String tomcatDir = currentDir + File.separatorChar + "tomcat";
-			String webRoot = currentDir + File.separatorChar + "webapp";
+			String webRoot = currentDir + "/src/main" + File.separatorChar + "webapp/";
 			Tomcat tomcat = new Tomcat();
 			tomcat.setBaseDir(tomcatDir);
 			tomcat.setPort(8080);
-			tomcat.addWebapp("/Peer", webRoot);
+			Context context = tomcat.addWebapp("/Peer", webRoot);
+
 			// Add AprLifecycleListener
+
 			StandardServer server = (StandardServer) tomcat.getServer();
 			AprLifecycleListener listener = new AprLifecycleListener();
 			server.addLifecycleListener(listener);
-			tomcat.start();
-			tomcat.getServer().await();
-			Context context = tomcat.addWebapp("/", new File(webRoot).getAbsolutePath());
+
 			WebappLoader solrLoader = new WebappLoader(Peer.class.getClassLoader());
 			context.setLoader(solrLoader);
+
+			tomcat.start();
+			tomcat.getServer().await();
+
 		}
 		catch (IOException e) {
 			e.printStackTrace();
