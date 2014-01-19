@@ -9,12 +9,12 @@ import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 
-import org.apache.catalina.Context;
+/*import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.core.AprLifecycleListener;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.loader.WebappLoader;
-import org.apache.catalina.startup.Tomcat;
+import org.apache.catalina.startup.Tomcat;*/
 
 import at.ac.tuwien.swa.control.library.Library;
 import at.ac.tuwien.swa.control.library.impl.LibraryImpl;
@@ -26,7 +26,7 @@ public class Peer {
 	private final static Logger logger = Logger.getLogger(Peer.class.getName());
 	private static PeerType peerType;
 	private static Integer port;
-	private static Integer ip;
+	private static String ip;
 	private static String localWsdl;
 	private static String serverWsdl;
 	private static String libraryPath;
@@ -35,32 +35,25 @@ public class Peer {
 	private static PeerInformation peerInformation;
 
 	public static void mainx(String[] args) {
-		runServer();
+		// runServer();
 	}
 
 	public static void main(String[] args) {
 		String runCommandError = "Please run your peer with following arguments\n" + "<path> for song library\n" + "<wsdl> location of the server (super peer) sevice\n" + "<ip> for this peer to run on\n" + "<port> for this peer to run on\n" + "<peerType> EDGE | RELAY | SUPER peer type\n" + "<username> peer username\n" + "<password> peer password";
-		if (args.length < 8) {
+		if (args.length < 7) {
 			logger.log(Level.SEVERE, runCommandError);
 			return;
 		}
 
 		libraryPath = args[0];
 		serverWsdl = args[1];
-		ip = null;
+		ip = args[2];
 		port = null;
 		peerType = null;
-		username = args[6];
-		password = args[7];
+		username = args[5];
+		password = args[6];
 		// 127.0.0.1:8080/peer/serverService?wsdl
-		localWsdl = "http://" + ip + ":" + port + "/peer/peerService?wsdl";
-		try {
-			ip = Integer.parseInt(args[2]);
-		}
-		catch (NumberFormatException e) {
-			logger.log(Level.SEVERE, "Invalid IP format: IP argument must be a number...\n" + runCommandError);
-			return;
-		}
+		localWsdl = "http://" + ip + ":" + port + "/peer/peerService?wsdl";		
 		try {
 			port = Integer.parseInt(args[3]);
 		}
@@ -69,7 +62,7 @@ public class Peer {
 			return;
 		}
 		try {
-			peerType = PeerType.valueOf(args[5]);
+			peerType = PeerType.valueOf(args[4]);
 		}
 		catch (Exception e) {
 			logger.log(Level.SEVERE, "Invalid peer type argument.\n" + runCommandError);
@@ -86,6 +79,10 @@ public class Peer {
 		}
 		if (serverWsdl.isEmpty()) {
 			logger.log(Level.SEVERE, "Missing server wsdl url...\n" + runCommandError);
+			return;
+		}
+		if (ip.isEmpty()) {
+			logger.log(Level.SEVERE, "Missing peer IP...\n" + runCommandError);
 			return;
 		}
 		if (port % 8079 == 0) {
@@ -106,18 +103,27 @@ public class Peer {
 	}
 
 	public void run() {
-		runServer();
+		//runServer();
 		Library controller = new LibraryImpl(libraryPath);
 		controller.loadLibrary();
 		controller.printSongs();
 		hitEnterToStop();
 	}
 
-	public static void runServer() {
+	/*public static void runServer() {
 		try {
 			String currentDir = new File(".").getCanonicalPath();
+			
+			System.out.println(currentDir);
+			
 			String tomcatDir = currentDir + File.separatorChar + "tomcat";
-			String webRoot = currentDir + "/src/main" + File.separatorChar + "webapp/";
+			
+			System.out.println(tomcatDir);
+			
+			String webRoot = currentDir + File.separatorChar + "webapp";
+			
+			System.out.println(webRoot);
+			
 			Tomcat tomcat = new Tomcat();
 			tomcat.setBaseDir(tomcatDir);
 			tomcat.setPort(port);
@@ -145,7 +151,7 @@ public class Peer {
 		catch (LifecycleException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	private void hitEnterToStop() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

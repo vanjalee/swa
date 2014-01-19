@@ -5,15 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import org.apache.log4j.Priority;
 import org.apache.tika.Tika;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -31,14 +29,13 @@ import at.ac.tuwien.swa.control.library.Library;
 import at.ac.tuwien.swa.control.library.dto.Song;
 import at.ac.tuwien.swa.control.library.dto.Songs;
 import at.ac.tuwien.swa.service.dto.AnalysisResult;
+import at.ac.tuwien.swa.util.PeerLogger;
+import at.ac.tuwien.swa.util.PropertyLoader;
 
 public class LibraryImpl implements Library {
 
-	public LibraryImpl() {
-	}
-
-	private final static Logger logger = Logger.getLogger(LibraryImpl.class
-			.getName());
+	public LibraryImpl() {}
+	
 	private String libraryPath;
 
 	public LibraryImpl(String libraryPath) {
@@ -65,6 +62,8 @@ public class LibraryImpl implements Library {
 	@PostConstruct
 	@Override
 	public void loadLibrary() {
+		libraryPath = PropertyLoader.getInstance().getProperties()
+				.getProperty("libraryPath");
 		try {
 			scanFolder(libraryPath);
 		} catch (IOException e) {
@@ -77,11 +76,9 @@ public class LibraryImpl implements Library {
 		if (list == null)
 			return;
 		for (File file : list) {
-
 			String mediaType = tika.detect(file);
 			if (mediaType.equals("audio/mpeg")) {
-				// logger.log(Level.INFO, "File type: " + mediaType);
-				System.out.println(file.getName());
+				PeerLogger.getInstance().log(Priority.INFO_INT, "File: " + file.getName() + ", type: " + mediaType);
 				generateFingerPrint(file);
 			}
 		}
@@ -116,7 +113,6 @@ public class LibraryImpl implements Library {
 							.get(file.getName()).equals(fingerprint))) {
 				Song song = new Song(file.getName(), fingerprint, file);
 				fillAudioInformation(song);
-
 				addSong(song);
 			}
 			audioInputStream.close();
@@ -169,12 +165,13 @@ public class LibraryImpl implements Library {
 	public AnalysisResult match(Fingerprint fingerprint) {
 		for (String key : library.keySet()) {
 			if (fingerprint.match(library.get(key).getFingerprint()) > -1) {
-				return new AnalysisResult(library.get(key).getArtist(), library.get(key).getTitle(), true);				
+				return new AnalysisResult(library.get(key).getArtist(), library
+						.get(key).getTitle(), true);
 			}
 		}
 		return new AnalysisResult(null, null, false);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -198,43 +195,41 @@ public class LibraryImpl implements Library {
 	public void printSongs() {
 		Songs songs = getSongs();
 		for (Song s : songs.getSongs()) {
-			logger.info(s.getSongFileName());
+			PeerLogger.getInstance().log(Priority.INFO_INT, s.getSongFileName());
 		}
 	}
 
 	private Song fillAudioInformation(Song song) throws CannotReadException,
 			IOException, TagException, ReadOnlyFileException,
 			InvalidAudioFrameException {
-		// the lib is too verbose... shut it up
-		LogManager.getLogManager().reset();
 		AudioFile f = AudioFileIO.read(song.getSongFile());
 		Tag tag = f.getTag();
-		LogManager.getLogManager().readConfiguration();	
-		
 		try {
 			song.setArtist(tag.getFirst(FieldKey.ARTIST));
 			song.setTitle(tag.getFirst(FieldKey.TITLE));
 		} catch (KeyNotFoundException e) {
 			fillRawInformation(song);
-			logger.log(Level.WARNING, song.getSongFileName() + " : This audio file has no information attached to it. Generating raw information.");
+			PeerLogger.getInstance().log(Priority.WARN_INT, song.getSongFileName()
+					+ " : This audio file has no information attached to it. Generating raw information.");
 		} catch (NullPointerException e) {
 			fillRawInformation(song);
-			logger.log(Level.WARNING, song.getSongFileName() + " : This audio file has no information attached to it. Generating raw information.");
-		}		
+			PeerLogger.getInstance().log(Priority.WARN_INT, song.getSongFileName()
+					+ " : This audio file has no information attached to it. Generating raw information.");
+		}
 		return song;
 	}
-	
+
 	private void fillRawInformation(Song song) {
 		String artist = null;
 		String title;
-		String [] split = song.getSongFileName().split(" - ");			
-		if(split.length == 2) {			
-			// System.out.println(split[0] + " = " + split[1]);			
+		String[] split = song.getSongFileName().split(" - ");
+		if (split.length == 2) {
+			// System.out.println(split[0] + " = " + split[1]);
 			artist = split[0];
-			String [] splitTitle = split[1].split("\\.");
+			String[] splitTitle = split[1].split("\\.");
 			title = splitTitle[0];
 		} else {
-			String [] splitTitle = split[1].split("\\.");
+			String[] splitTitle = split[1].split("\\.");
 			title = splitTitle[0];
 		}
 		song.setArtist(artist);

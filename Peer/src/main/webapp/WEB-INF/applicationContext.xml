@@ -8,6 +8,9 @@
 	http://jax-ws.dev.java.net/spring/servlet http://jax-ws.java.net/spring/servlet.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config />
+
 	<wss:binding url="/peer">
 		<wss:service>
 			<ws:service bean="#peerService" />
